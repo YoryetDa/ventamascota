@@ -1,12 +1,13 @@
 package com.ventas.ventas.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
 @Table(name = "productos")
+
 public class Producto {
 
     @Id
@@ -20,10 +21,13 @@ public class Producto {
     private BigDecimal precio;
 
     @ManyToMany(mappedBy = "productos")
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     private List<Venta> ventas;
 
-    public Producto() {}
+    public Producto() {
+
+    }
 
     // Getters y setters
     public Long getId() {
