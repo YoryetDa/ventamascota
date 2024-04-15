@@ -1,5 +1,5 @@
 package com.ventas.ventas.Models;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -13,13 +13,15 @@ public class Venta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
         name = "venta_productos",
         joinColumns = @JoinColumn(name = "venta_id"),
         inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
-    @JsonManagedReference
+    //@JsonManagedReference
+    //@JsonIgnore
+
     private List<Producto> productos;
 
     @Column(name = "fecha_venta")
